@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services/FlickrService.js"></script>
+    <script src="js/controllers/SearchFlickrController.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Search Flickr Image</h2>
+        <div ng-controller="SearchFlickrController">
+            <form class="well form-search" ng-submit="search()">            
+                <input type="text" ng-model="keyword" placeholder="Search By Keyword" class="input-large search-query" />
+                <input class="btn btn-primary" type="submit" value="Search" />
+            </form>
+            <ul class="flickr-results row-fluid thumbnails">
+                <li ng-repeat="photo in photos" class="span3">
+                    <a href="#" class="thumbnail" title="{{photo.title}}" ><img ng-src="{{photo.thumbUrl}}" alt="{{photo.title}}" /></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
