@@ -1,17 +1,18 @@
 'use strict';
 
-angular.module('flickrService', []).factory('FlickrService', function($resource) {            
-    $resource.defaults.useXDomain = true;
-    delete $resource.defaults.headers.common['X-Requested-With']; // Prevent to send OPTIONS request instead of GET request.
-
+angular.module('flickrServices', ['ngResource']).factory('FlickrService', function($resource, $q) {
+    
+    var FLICKR_API_KEY = '84ad829261f6347dbfc4bf23fc1afdbd';
+    var FLICKR_ITEMS_PER_PAGE = 48;
+    
     return {
-        findAllFlickrPhotos: function(keyword, $q) {
+        findAllFlickrPhotos: function(keyword, page) {
             var deferred = $q.defer();
-            var apiUrl = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + FLICKR_API_KEY + '&tags=' + keyword + '&format=json&nojsoncallback=1';
-            
-            $resource.get(apiUrl).success(function (data) {
+            var apiUrl = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + FLICKR_API_KEY + '&tags=' + keyword + '&format=json&nojsoncallback=1&per_page=' + FLICKR_ITEMS_PER_PAGE + '&page=:page';
+            var resource = $resource(apiUrl, {'page': '@id'});
+            resource.get({'page': page}, function (data) {
                 deferred.resolve(data);
-            }).error(function (error) {
+            }, function() {
                 deferred.reject("An error occured while fetching items");
             });
             

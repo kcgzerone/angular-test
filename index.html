@@ -1,23 +1,32 @@
 <!doctype html>
-<html ng-app="myApp">
+<html ng-app="flickrApp">
 <head>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css" />
     
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    <script src="js/jquery/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <!--<script src="http://code.angularjs.org/1.1.5/angular.js"></script>-->
     <script src="js/app.js"></script>
-    <script src="js/services/FlickrService.js"></script>
     <script src="js/controllers/SearchFlickrController.js"></script>
+    <script src="js/services/FlickrService.js"></script>
+    <script src="js/directives/scrollbar-directive.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Search Flickr Image</h2>
-        <div ng-controller="SearchFlickrController">
+        <div id="content_1" ng-controller="SearchFlickrController">
             <form class="well form-search" ng-submit="search()">            
                 <input type="text" ng-model="keyword" placeholder="Search By Keyword" class="input-large search-query" />
                 <input class="btn btn-primary" type="submit" value="Search" />
+                <input id="nextpage" class="btn btn-primary" type="button" value="Next Page" ng-click="nextPage()" />
             </form>
-            <ul class="flickr-results row-fluid thumbnails">
+            <ul class="flickr-results row-fluid thumbnails" scrollbar="{set_height: '600', callbacks: { onTotalScroll: nextPage } }">
                 <li ng-repeat="photo in photos" class="span3">
                     <a href="#" class="thumbnail" title="{{photo.title}}" ><img ng-src="{{photo.thumbUrl}}" alt="{{photo.title}}" /></a>
                 </li>

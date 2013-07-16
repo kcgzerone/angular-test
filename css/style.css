@@ -1,3 +1,4 @@
-ul.flickr-results { list-style: none; margin: 0px; }
+ul.flickr-results { list-style: none; margin: 0px; background-color: #333; border-radius: 3px; padding: 10px; }
+ul.flickr-results.mCustomScrollbar { }
 ul.flickr-results li { margin-bottom: 10px; }
 ul.flickr-results li:nth-child(4n+1) { margin-left: 0px; clear:both; }
