@@ -26,7 +26,7 @@
                 <input class="btn btn-primary" type="submit" value="Search" />
                 <input id="nextpage" class="btn btn-primary" type="button" value="Next Page" ng-click="nextPage()" />
             </form>
-            <ul class="flickr-results row-fluid thumbnails" scrollbar="{set_height: '600', callbacks: { onTotalScroll: nextPage } }">
+            <ul class="flickr-results row-fluid thumbnails" scrollbar="{set_height: 600, callbacks: { onTotalScroll: nextPage } }">
                 <li ng-repeat="photo in photos" class="span3">
                     <a href="#" class="thumbnail" title="{{photo.title}}" ><img ng-src="{{photo.thumbUrl}}" alt="{{photo.title}}" /></a>
                 </li>
