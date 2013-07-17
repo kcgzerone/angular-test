@@ -15,7 +15,12 @@ function SearchFlickrController($scope, $http, FlickrService) {
             $scope.curPage = 1;
         }
         
+        $('.mCSB-loading-indicator').css('visibility', 'visible');
+        
         FlickrService.findAllFlickrPhotos($scope.keyword, $scope.curPage).then(function (data) {
+            
+            $('.mCSB-loading-indicator').css('visibility', 'hidden');
+            
             $scope.totalPage = data.photos.pages;
             $scope.curPage = data.photos.page;
             

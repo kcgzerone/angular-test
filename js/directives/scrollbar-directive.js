@@ -34,6 +34,7 @@ angular.module('scrollbarDirective', []).directive('scrollbar', function() {
             }
             
             elem.mCustomScrollbar(sc_attrs);
+            elem.after($('<div>').addClass('mCSB-loading-indicator'));
         }
     };
 });
